@@ -18,7 +18,7 @@
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
 
-<title>jsp 게시판 웹사이트</title>
+<title>분리분리</title>
 
 </head>
 
@@ -152,6 +152,3 @@
 
 </html>
 
-
-
-출처: https://tbbrother.tistory.com/66 [밑끝없로그]
