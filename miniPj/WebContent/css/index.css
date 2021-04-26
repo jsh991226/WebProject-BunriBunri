@@ -30,18 +30,36 @@
 #leftContent{
 	width: 70%;
 	height: 100%;
-	background-color: red;
+	background-color: white;
 	float: left;
 }
 #rightContent{
 	width: 30%;
 	height: 100%;
-	background-color: salmon;
+	background-color: white;
 	float: left;
 }
 
 
 #loginBox > form > input {
 	display: block;
-	
 }
+
+#boardBox {
+	width: 700px;
+	height: 500px;
+}
+
+.form-control[readonly]{
+	background-color: white;
+}
+
+textarea { 
+   resize:vertical; 
+} 
+
+.replyDelete, .replyEdit{
+	 cursor:pointer;
+}
+
+

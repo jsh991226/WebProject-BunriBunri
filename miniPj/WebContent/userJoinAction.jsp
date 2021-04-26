@@ -21,10 +21,11 @@
     }     
 
     
-    if (userID == null || userPW == null || userNICK == null || userEMAIL == null) { 
+    if (userID == "" || userPW == "" || userNICK == "" || userEMAIL == "") { 
         PrintWriter script = response.getWriter(); 
         script.println("<script>"); 
         script.println("alert('[알림] 빈칸이 존재합니다.')"); 
+        script.println("location.href='index.jsp';"); 
         script.println("</script>"); 
         script.close(); 
         return; 
