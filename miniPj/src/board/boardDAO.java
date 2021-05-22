@@ -35,6 +35,7 @@ public class boardDAO extends commonDAO{
                 	bd.setContent(rs.getString(7));
                 	bd.setView(rs.getString(8));
                 	bd.setReplyCnt(getReplyCount(rs.getString(1))+"");
+                	bd.setImage(rs.getString(9));
                 	result.add(bd);
                 }while(rs.next());
             }
@@ -96,7 +97,6 @@ public class boardDAO extends commonDAO{
 					return nick;
 				}
 			}else {
-				System.out.println("아이디 없음 거름");
 				return nick;					
 			}
 
@@ -161,7 +161,8 @@ public class boardDAO extends commonDAO{
                 do{
                 	if (viewCheck == false ) vcTemp = (rs.getInt(8)+1);
                 	else  vcTemp = (rs.getInt(8));
-                	result = rs.getString(1)+"|"+rs.getString(2)+"|"+rs.getString(3)+"|"+rs.getString(4)+"|"+rs.getString(5)+"|"+rs.getString(6)+"|"+rs.getString(7)+"|"+vcTemp;
+                	result = rs.getString(1)+"|"+rs.getString(2)+"|"+rs.getString(3)+"|"+rs.getString(4)+"|"+rs.getString(5)+"|"+
+                	rs.getString(6)+"|"+rs.getString(7)+"|"+vcTemp+"|"+rs.getString(9)+"|"+ getNICK(rs.getString(4));
                 	if (viewCheck == false ) viewNum = rs.getInt(8)+1;
                 }while(rs.next());
             }
@@ -182,10 +183,9 @@ public class boardDAO extends commonDAO{
 		return null;  
 	}	
 	
-	public int write(String boardTitle, String boardContent, String userNICK) {
-		String SQL = "INSERT INTO BOARD VALUES (?,?,?,?,?,?,?,?)"; 
+	public int write(String boardTitle, String boardContent, String userNICK, String filesystemName) {
+		String SQL = "INSERT INTO BOARD VALUES (?,?,?,?,?,?,?,?,?)"; 
 		//b_id, grp_id, grp_order, user_id, title, date, content, view
-		System.out.println(userNICK +"의 게시물");
 		SimpleDateFormat format = new SimpleDateFormat ( "yyyy년 MM월 dd일 HH시 mm분");
 		Connection conn = DatabaseUtil.getConnection(); 
 		Date time = new Date();
@@ -193,16 +193,15 @@ public class boardDAO extends commonDAO{
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(SQL); // 쿼리문의 ?안에 각각의 데이터를 넣어준다. 
-			int temp =  cntRows("board")+1;
-			pstmt.setInt(1, temp); 
-			pstmt.setInt(2, temp); 
+			pstmt.setInt(1, 0); 
+			pstmt.setInt(2, 0); 
 			pstmt.setString(3, "0");
 			pstmt.setString(4, userNICK);
 			pstmt.setString(5, boardTitle);
 			pstmt.setString(6, nowDate);
 			pstmt.setString(7, boardContent);
 			pstmt.setInt(8, 0);
-			System.out.println(temp+"번째 게시물 추가 완료");
+			pstmt.setString(9,  filesystemName);
 			return pstmt.executeUpdate();
 			} catch (Exception e) { 
 				e.printStackTrace(); 
@@ -215,11 +214,44 @@ public class boardDAO extends commonDAO{
 			} 
 		
 		return -1; 
-				
 	} 
 	
-	
-
+	public int delete(String postNum, String userID) {
+		String SQL = "DELETE FROM board WHERE b_id = " + postNum;
+		Connection conn = DatabaseUtil.getConnection(); 
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			System.out.println("게시물 지우는중" + postNum);
+			return pstmt.executeUpdate();
+			} catch (Exception e) { 
+				e.printStackTrace(); 
+			} finally {
+				if (pstmt != null) try { pstmt.close(); } catch(Exception e) {}
+				if (conn != null) try { conn.close(); } catch(Exception e) {}
+			}   return -1; 
+			
+	}
+	public int editPost(String boardTitle, String boardContent, String userNICK, String filesystemName, String postNum) {
+		String SQL = "UPDATE board SET title = '" + boardTitle + "', content = '" +boardContent + "', image = '" + filesystemName + "' where b_id = " + postNum;
+		if (filesystemName == null) {
+			SQL = "UPDATE board SET title = '" + boardTitle + "', content = '" +boardContent + "' where b_id = " + postNum;
+		}
+		
+		Connection conn = DatabaseUtil.getConnection(); 
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(SQL); // 쿼리문의 ?안에 각각의 데이터를 넣어준다. 
+			return pstmt.executeUpdate();
+			} catch (Exception e) { 
+				e.printStackTrace(); 
+			}  finally {
+				if (pstmt != null) try { pstmt.close(); } catch(Exception e) {}
+				if (pstmt != null) try { pstmt.close(); } catch(Exception e) {}
+				if (conn != null) try { conn.close(); } catch(Exception e) {}
+			} 
+		return -1; 
+	} 
 	
 
 }

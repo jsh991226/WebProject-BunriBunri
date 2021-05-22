@@ -37,6 +37,8 @@
 	}
 	
 	 String boardTitle = (String)mrequest.getParameter("boardTitle"); 
+	 String postNum = (String)mrequest.getParameter("postNum"); 
+	 String editPhoto = (String)mrequest.getParameter("editPhoto"); 
      String boardContent = (String)mrequest.getParameter("boardContent").replace("\r\n", "<br/>"); 
 
     
@@ -51,13 +53,13 @@
     } 
     
     String user_id = (session.getAttribute("userID")+"");
-    System.out.println( "테스트 로그 : " + boardTitle + " : " + boardContent + " : " + user_id + " : " + UserFile);
     boardDAO _boardDAO = new boardDAO(); 
-    int result = _boardDAO.write(boardTitle, boardContent, user_id, UserFile);
+    
+    int result = _boardDAO.editPost(boardTitle, boardContent, user_id, UserFile, postNum);
     if (result == 1) { 
         PrintWriter script = response.getWriter(); 
         script.println("<script>"); 
-        script.println("alert('[알림] 게시물이 작성되었습니다.')"); 
+        script.println("alert('[알림] 게시물이 수정되었습니다.')"); 
         script.println("location.href='index.jsp';"); 
         script.println("</script>"); 
         script.close(); 

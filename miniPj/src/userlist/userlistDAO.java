@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import jakarta.servlet.http.HttpSession;
 import common.commonDAO;
 import util.DatabaseUtil; 
 public class userlistDAO extends commonDAO{ 

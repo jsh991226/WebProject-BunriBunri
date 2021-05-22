@@ -17,10 +17,11 @@
 	String postNum = request.getParameter("postNum"); 
 	String results = "";
 	String user_nick ="";
+	String user_id = "";
 	List<reply> resultRp = new ArrayList<reply>();
 	if (session.getAttribute("loginCheck") == "true") {
 	    userlistDAO userDAO = new userlistDAO(); 
-	    String user_id = (session.getAttribute("userID")+"");
+	    user_id = (session.getAttribute("userID")+"");
 	    String result = userDAO.getNICK(user_id); 
 	    user_nick = result;
 		boardDAO boardDAO = new boardDAO(); 
@@ -57,27 +58,37 @@
 
 <!-- 스타일시트 참조  -->
 
-		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="./css/bootstrap.css">
         <link rel="stylesheet" href="./css/index.css">
         <script src="./js/jquery-1.9.1.min.js"></script>
+    	<script src="./js/index.js"></script>
     	<script src="./js/board.js"></script>
     	<script src="./js/sweetalert.min.js"></script>
     	<script>
-
 			var cvsResults = "<%=results%>";
 			var sptemp = cvsResults.split("|");
+			var writeUser = sptemp[3];
+			var nowUser = "<%=user_id%>";
 			$(document).ready(function(){
-
+				$("#deletePostNum").val(sptemp[0]);
 				$("#postTitle").val(sptemp[4]);
 				$("#postContent").text(sptemp[6].replaceAll("<br/>", "\n"));
 				$("#postView").val("조회수 : " + sptemp[7]);
-				$("#postWriter").val("작성자 : " + sptemp[3]);
+				$("#postWriter").val("작성자 : " + sptemp[9]);
 				$("#postDate").val("작성일 : " + sptemp[5]);
 				$("#postNumInput").val(sptemp[0]);
-				console.log("테스트테스트 : " + $("#postNumInput").val(sptemp[0]) + "-"+sptemp[0]);
+				$("#postImage").text("사진이름: " + sptemp[8]); //C:\Users\jsh99\git\repository\miniPj\WebContent\upload
+				if (sptemp[8] != "null") {
+					$('#postImage').attr('src', 'upload/' + sptemp[8]);
+					$('#postImage').css('display', '');
+				}
+				if ( writeUser == nowUser) {
+					$("#postOwner").css('display','');
+					$(".postDelete").attr('onClick', 'deletePost("'+sptemp[0]+'")')
+					$(".postEdit").attr('onClick', 'editPost("'+sptemp[0]+'")')
+				}
 				
-			})
-
+			});
 			
 
     	</script>
@@ -171,14 +182,20 @@
 							<td><input type="text" class="form-control form-control-plaintext" readonly id= "postDate" maxlength="50"/></td>
 							<td><input type="text" class="form-control form-control-plaintext" readonly id="postView" maxlength="50"/></td>
 						</tr>
+						<tr>
+							<td colspan="3"><img id="postImage" src='' style="display:none" /></td>
+						</tr>
 
 						<tr>
 
 							<td colspan="3"><textarea class="form-control form-control-plaintext" readonly id="postContent" maxlength="2048" style="height: 350px;"></textarea></td>
 
 						</tr>
-						<tr>
-
+						<tr id="postOwner">
+							<td colspan="3">
+								<a class="postEdit">[수정]</a>
+								<a class="postDelete">[삭제]</a>
+							</td>
 						</tr>
 
 					</tbody>
@@ -194,17 +211,42 @@
 	</div>
 	<div>
 		<% 
+			List<reply> resultRrp = new ArrayList<reply>();
+			int temp=0;
+			replyDAO reply = new replyDAO(); 
 			for( reply index : resultRp) {
-		%>
+				resultRrp = reply.reLoad(postNum, index.getR_id());
+		%>		
 				<div>
 					<jsp:include page="replyView.jsp" >
 						<jsp:param name="userNick" value="<%= index.getUser_nick() %>" />
 						<jsp:param name="writerID" value="<%= index.getUser_id() %>" />
 						<jsp:param name="date" value="<%=index.getDate() %>" />
 						<jsp:param name="content" value="<%=index.getContent() %>" />
+						<jsp:param name="replyID" value="<%=index.getR_id() %>" />
+						<jsp:param name="postNum" value="<%=index.getB_id() %>" />
 					</jsp:include>
 				</div>
 		<%
+				if (resultRrp.size() > 0 ) {
+					for( reply subindex : resultRrp) {
+						%>
+						<div>
+							<jsp:include page="rereplyView.jsp" >
+								<jsp:param name="userNick" value="<%= subindex.getUser_nick() %>" />
+								<jsp:param name="writerID" value="<%= subindex.getUser_id() %>" />
+								<jsp:param name="date" value="<%=subindex.getDate() %>" />
+								<jsp:param name="content" value="<%=subindex.getContent() %>" />
+								<jsp:param name="replyID" value="<%=subindex.getR_id() %>" />
+								<jsp:param name="postNum" value="<%=subindex.getB_id() %>" />
+							</jsp:include>
+						</div>						
+						<%
+					}
+					
+					
+				}
+		
 			}
 		%>
 	</div>

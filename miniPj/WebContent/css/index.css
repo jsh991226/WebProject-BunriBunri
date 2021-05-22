@@ -24,17 +24,19 @@
 	width: 100%;
 	height: 500px;
 	background-color: beige;
+	margin-top: 30px;
+	
 	
 }
 
 #leftContent{
-	width: 70%;
+	width: 60%;
 	height: 100%;
 	background-color: white;
 	float: left;
 }
 #rightContent{
-	width: 30%;
+	width: 40%;
 	height: 100%;
 	background-color: white;
 	float: left;
@@ -58,8 +60,10 @@ textarea {
    resize:vertical; 
 } 
 
-.replyDelete, .replyEdit{
+.replyDelete, .replyEdit, .rereplyWrite, .postEdit, .postDelete{
 	 cursor:pointer;
+	 font-weight: bold;
+	 
 }
 
 

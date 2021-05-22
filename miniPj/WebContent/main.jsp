@@ -41,7 +41,7 @@
 
         <div id="wrapper">
             <div id="header">
-            	<img id="titleImg" src="./images/logosample.png" />   
+            	<a href="main.jsp"><img id="titleImg" src="./images/logosample.png" />   </a>
             	             
             </div>
             <div id="content">
@@ -55,6 +55,7 @@
                 	<p><%=user_nick%> 님 환영한다능<p>
                 	<button onclick="location='userLogout.jsp'">로그아웃</button>
                 	<button onclick="location='writeBoard.jsp'">글쓰기</button>
+                	<button onclick="location='mypage.jsp'">내정보</button>
                		
                 
                 </div>

@@ -6,17 +6,32 @@
 <%@ page import="com.oreilly.servlet.MultipartRequest,com.oreilly.servlet.multipart.DefaultFileRenamePolicy,java.util.*,java.io.*" %>
 
 
+
 <%
-	request.setCharacterEncoding("UTF-8"); 
-	ArrayList<String> results = new ArrayList<String>();
+
+			
+		
+	
+	
+	String postNum = request.getParameter("postNum"); 
+	String results = "";
 	String user_nick ="";
+	String user_id = "";
 	if (session.getAttribute("loginCheck") == "true") {
 	    userlistDAO userDAO = new userlistDAO(); 
-	    String user_id = (session.getAttribute("userID")+"");
+	    user_id = (session.getAttribute("userID")+"");
 	    String result = userDAO.getNICK(user_id); 
 	    user_nick = result;
 		boardDAO boardDAO = new boardDAO(); 
-
+		boolean viewCheck;
+		if ( postNum.equals(session.getAttribute("viewCheck"))) {
+			viewCheck = true;
+		} else {
+			session.setAttribute("viewCheck", postNum);
+			viewCheck = false;
+		}
+		request.setCharacterEncoding("UTF-8"); 
+		results = boardDAO.postLoad(postNum, viewCheck); 
 	} else {
 		response.sendRedirect("plzReg.jsp");
 	}
@@ -24,6 +39,7 @@
 
 
 %>
+
 
 <!DOCTYPE html>
 
@@ -45,9 +61,16 @@
     	<script src="./js/board.js"></script>
     	<script src="./js/index.js"></script>
     	<script src="./js/sweetalert.min.js"></script>
-    	<script type="text/javascript">
+    	<script>
+			var cvsResults = "<%=results%>";
+			var sptemp = cvsResults.split("|");
+			var writeUser = sptemp[3];
+			var nowUser = "<%=user_id%>";
+			var imageChange = false;
+			console.log("글쓴이 : " + writeUser + " , 접속한 사람 : " + nowUser)
 			$(document).ready(function(){
 				$("#fileInput").on('change', function(){ // 값이 변경되면
+					$("#editForm").attr('action','editBoardAction.jsp?postNum=' + <%=postNum%> + "&editPhoto=true");
 					if(window.FileReader){ // modern browser
 						var filename = $(this)[0].files[0].name;
 					} else { // old IE
@@ -56,8 +79,27 @@
 						// 추출한 파일명 삽입
 					$("#userfile").val(filename);
 				});
+			});			
+			$(document).ready(function(){
+				$("#deletePostNum").val(sptemp[0]);
+				$("#postTitle").val(sptemp[4]);
+				$("#postContent").text(sptemp[6].replaceAll("<br/>", "\n"));
+				$("#postView").val("조회수 : " + sptemp[7]);
+				$("#postWriter").val("작성자 : " + sptemp[9]);
+				$("#postDate").val("작성일 : " + sptemp[5]);
+				$("#postNumInput").val(sptemp[0]);
+				$("#postImage").text("사진이름: " + sptemp[8]); //C:\Users\jsh99\git\repository\miniPj\WebContent\upload
+				if (sptemp[8] != "null") {
+					$('#loadImg').attr('src', 'upload/' + sptemp[8]);
+					$('#loadImg').css('display', '');
+					$('#userfile').val(sptemp[8]);
+				}
+
+				
 			});
-		</script>
+			
+
+    	</script>
 
 
 
@@ -120,7 +162,7 @@
 
 		<div class="row">
 
-			<form method="post" action="writeBoardAction.jsp?v=999" accept="image/*" enctype="Multipart/form-data">
+			<form method="post" id="editForm" action="editBoardAction.jsp?postNum=<%=postNum%>" accept="image/*" enctype="Multipart/form-data">
 
 				<table class="table table-striped"
 
@@ -130,7 +172,7 @@
 
 						<tr>
 
-							<thstyle="background-color: #eeeeee; text-align: center;">게시물 작성</th>
+							<th style="background-color: #eeeeee; text-align: center;">게시물 수정</th>
 
 						</tr>
 
@@ -140,17 +182,17 @@
 
 						<tr>
 
-							<td><input type="text" class="form-control" placeholder="글 제목" name="boardTitle" maxlength="50"/></td>
+							<td><input type="text" class="form-control" placeholder="글 제목" id="postTitle" name="boardTitle" maxlength="50"/></td>
 
 						</tr>
 
 						<tr>
 
-							<td><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height: 350px;"></textarea></td>
+							<td><textarea class="form-control" placeholder="글 내용" name="boardContent" id="postContent" maxlength="2048" style="height: 350px;"></textarea></td>
 
 						</tr>
 						<tr>
-							<td>
+							<td colspan="1">
 								<img src="" id="loadImg" style="margin:10px;display:none;"/>
 							</td>
 						</tr>
@@ -175,7 +217,7 @@
 
 				</table>	
 
-				<input type="submit" class="btn btn-primary pull-right" value="글쓰기" />
+				<input type="submit" class="btn btn-primary pull-right" value="수정완료" />
 			</form>
 
 		</div>

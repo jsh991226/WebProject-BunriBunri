@@ -8,15 +8,9 @@
 
 <% //사용자가 보낸 데이터를 한글을 사용할 수 있는 형식으로 변환 
     request.setCharacterEncoding("UTF-8"); 
-    String postNum = (String) request.getParameter("postNum"); String replyContent = (String) request.getParameter("replyContent").replace("\r\n", "<br/>"); 
-    /*PrintWriter scripte = response.getWriter();
-    scripte.println("<script>"); 
-    scripte.println("alert('[알림] 테스트 포스트 넘 :  "+ postNum +"')"); 
-    scripte.println("window.history.back()");
-    scripte.println("</script>"); 
-    scripte.close(); */
-    
-    
+	String postNum = (String) request.getParameter("postNum"); 
+	
+	    
 	String results = "";
 	String user_nick ="";
 	if (session.getAttribute("loginCheck") == "true") {
@@ -28,24 +22,24 @@
     
     
     
-    if (postNum == "" || replyContent == "") { 
+    if (postNum == "") { 
         PrintWriter script = response.getWriter();
         script.println("<script>"); 
-        script.println("alert('[알림] 작성한 댓글 양식이 올바르지 않습니다 "+ postNum +" .')"); 
+        script.println("alert('[알림] 무언가 잘못되었습니다.')"); 
         script.println("window.history.back()");
         script.println("</script>"); 
         script.close(); 
         return; 
     } 
     String user_id = (session.getAttribute("userID")+"");
-    replyDAO replyDAO = new replyDAO(); 
+    boardDAO _boardDAO = new boardDAO(); 
     
-    int result = replyDAO.write(postNum, replyContent, user_id); 
+    int result = _boardDAO.delete(postNum, user_id); 
     if (result == 1) { 
         PrintWriter script = response.getWriter(); 
         script.println("<script>"); 
-        script.println("console.log('[알림] 댓글이 작성되었습니다.')"); 
-        script.println("location.href='viewPost.jsp?postNum="+ postNum + "';");
+        script.println("alert('[알림] 게시물이 삭제 되었습니다.')"); 
+        script.println("location.href='index.jsp';");
         script.println("</script>"); 
         script.close(); 
         return; 

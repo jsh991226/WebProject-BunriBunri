@@ -19,6 +19,7 @@ public class Board  extends userlistDAO{
 	private String content;
 	private String view;
 	private String replyCnt;
+	private String Image;
 	
 	
 	public String getReplyCnt() {
@@ -49,6 +50,15 @@ public class Board  extends userlistDAO{
 	public String getUser_id() {
 		return user_id;
 	}
+	public String getImage() {
+		return Image;
+	}
+	public void setImage(String Image) {
+		this.Image = Image;
+	}
+	
+	
+	
 	public String getUser_nick() {
 		String nick = "0";
 		String SQL = "SELECT user_nick FROM userlist where user_id='" + getUser_id()+"'"; 
