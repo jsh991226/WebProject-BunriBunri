@@ -113,9 +113,66 @@ public class userlistDAO extends commonDAO{
 
 		}   
 		return nick; 
-						
-		
 	}
+	public String getUserData(String userID, String data) {
+		Connection conn = DatabaseUtil.getConnection(); 
+		String result = "0";
+		String SQL = "SELECT "+ data + " FROM userlist where user_id='" + userID+"'"; 
+		PreparedStatement pstmt = null;
+		ResultSet results = null;
+		try {
+			pstmt = conn.prepareStatement(SQL); // 쿼리문의 ?안에 각각의 데이터를 넣어준다. 
+			if (idCheck(userID) == true) {
+				results = pstmt.executeQuery();
+				while(results.next()) {
+					result = results.getString(data);
+					return result;
+				}
+			}else {
+				return result;					
+			}
+
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+			
+		} finally {
+			if (results != null) try { results.close(); } catch(Exception e) {}
+			if (pstmt != null) try { pstmt.close(); } catch(Exception e) {}
+			if (conn != null) try { conn.close(); } catch(Exception e) {}
+
+		}   
+		return result; 
+	}	
+	public int getUserCnt(String userID, String tableName) {
+		Connection conn = DatabaseUtil.getConnection(); 
+		int result = 0;
+		String SQL = "SELECT count(*) cnt FROM "+tableName+" where user_id='" + userID+"'"; 
+		PreparedStatement pstmt = null;
+		ResultSet results = null;
+		try {
+			pstmt = conn.prepareStatement(SQL); // 쿼리문의 ?안에 각각의 데이터를 넣어준다. 
+			if (idCheck(userID) == true) {
+				results = pstmt.executeQuery();
+				while(results.next()) {
+					result = results.getInt("cnt");
+					return result;
+				}
+			}else {
+				return result;					
+			}
+
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+			
+		} finally {
+			if (results != null) try { results.close(); } catch(Exception e) {}
+			if (pstmt != null) try { pstmt.close(); } catch(Exception e) {}
+			if (conn != null) try { conn.close(); } catch(Exception e) {}
+
+		}   
+		return result; 
+	}		
+	
 	
 	
 	public boolean idCheck(String userID) {

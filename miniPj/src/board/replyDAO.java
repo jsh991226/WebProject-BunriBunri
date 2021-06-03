@@ -23,7 +23,7 @@ public class replyDAO extends commonDAO{
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, 0); 
-			pstmt.setString(2, postNum); 
+			pstmt.setString(2, postNum);
 			pstmt.setString(3, user_id);
 			pstmt.setString(4, replyContent);
 			pstmt.setString(5, nowDate);

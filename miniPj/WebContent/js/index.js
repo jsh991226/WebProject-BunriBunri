@@ -1,6 +1,52 @@
 $(document).on('click', '.boardPost', function() {
 	location.href = "./viewPost.jsp?postNum=" + $(this).attr('postNum');
+	//$("#mainView").load("./viewPost.jsp?postNum=" + $(this).attr('postNum'));
 });
+
+/*
+$(document).ready(function() {
+	$('#unRegisterBtn').click(function() {
+		$('#register').fadeOut();
+	});
+
+
+
+})*/
+
+function searchBtn(){
+	var searchType = $("#searchType").val();
+	var searchText = $("#boardSerach").val();
+	alert(searchType+searchText);
+}
+
+
+function viewPage(page) {
+
+	if (page == "register") {
+		//$("#register").css('display','block');
+		$('#register').fadeIn();
+	}
+	if (page == "login") {
+		//$("#register").css('display','block');
+		$('#login').fadeIn();
+	}	
+	if (page =="logout") {
+		location.href = "./userLogout.jsp";
+	}
+	if (page=="board") {
+		$("#mainView").load("./board.jsp");
+	}
+	if (page=="mypage") {
+		$('#mypage').fadeIn();
+	}
+	if (page=="policy") {
+		$("#mainView").load("./policy.jsp");
+	}	
+	if (page=="CallCenter") {
+		alert("[알림] 아직 준비중인 기능입니다");
+	}	
+	
+}
 
 function replyDelete(postNum, replyID) {
 	var jbResult = confirm('[!] 댓글을 삭제 하시겠습니까?');
@@ -10,6 +56,10 @@ function replyDelete(postNum, replyID) {
 		return;
 	}
 }
+
+
+
+
 
 function deletePost(postNum) {
 	var jbResult = confirm('[!] 게시물을 삭제 하시겠습니까?');
@@ -22,7 +72,8 @@ function deletePost(postNum) {
 function editPost(postNum) {
 	var jbResult = confirm('[!] 게시물을 수정 하시겠습니까?');
 	if (jbResult) {
-		location.href = "./editBoard.jsp?postNum=" + postNum;
+		//location.href = "./editBoard.jsp?postNum=" + postNum;
+		$("#mainView").load("./editBoard.jsp?postNum=" + postNum);
 	} else {
 		return;
 	}

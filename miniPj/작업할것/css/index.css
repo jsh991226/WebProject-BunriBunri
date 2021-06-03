@@ -6,26 +6,6 @@
 html {
 	scroll-behavior: smooth;
 }
-body {
-	padding-top: 200px;
-}
-
-input[readonly].whiteinput{
-  background-color:white;
-  border: 0;
-  font-size: 1em;
-}
-textarea[readonly].whiteinput{
-  background-color:white;
-  border: 0;
-  font-size: 1em;
-}
-#postImage{
-	width: 60%;
-	height: auto;
-	
-}
-
 
 a.top {
 	position: fixed;
@@ -45,15 +25,7 @@ a.top {
 }
 
 
-
-#boardHeadBox > div {
-	width: 12%;
-	float: left;
-	font-size: 0.8em;
-	margin-left: -15px;
-}
-
-#boardSerach{
+#boardHeadBox > input:first-child {
 	width: 20%;
 }
 
@@ -83,7 +55,7 @@ a.top {
 }
 
 
-#register, #login, #mypage{
+#register, #login{
 	display:none;
 	width: 100%;
 	height: 100%;
@@ -95,18 +67,6 @@ a.top {
 	z-index: 1000;
 
 }
-#mypageForm{
-	background-color:white;
-	position: absolute;
-	width: 40%;
-	height: 60%;
-	margin-left: 50%;
-	left: -20%;
-	top: 20%;	
-	
-	
-}
-
 
 #registerForm, #loginForm{
 	position: absolute;
@@ -130,6 +90,7 @@ a.top {
 
 
 #mainView {
+	margin-top: 250px;
 	width: 76%;
 	margin-left: 12%;
 	
@@ -263,13 +224,7 @@ textarea {
 	resize: vertical;
 }
 
-.replyDelete, .replyEdit, .rereplyWrite, .postEdit, .postDelete, .mypageExit,
+.replyDelete, .replyEdit, .rereplyWrite, .postEdit, .postDelete,
 	.boardPost {
 	cursor: pointer;
 }
-#mypageContent > div {
-	font-size: 1.3em;
-	font-weight: bold;
-	text-align: center;
-}
-

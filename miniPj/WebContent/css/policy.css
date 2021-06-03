@@ -1,0 +1,101 @@
+body{
+	padding: 0;
+}
+
+.OUTLINE {
+  stroke-linejoin:round;
+  stroke: #ffffff;
+  stroke-width: 2;
+  fill: #CCCCCC;
+  fill-opacity: 1;
+  cursor: pointer;
+}
+#Seoul:hover {
+  fill: #ffeefa;
+}
+
+#Busan:hover {
+  fill: #78D4FF;
+}
+#Daegu:hover {
+  fill: #B8C2FF;
+}
+#Incheon:hover {
+  fill: #ffbcec;
+}
+#Gwangju:hover {
+  fill: #B4E0C5;
+}
+#Daejeon:hover {
+  fill: #E5D3E6;
+}
+#Ulsan:hover {
+  fill: #C4ECFF;
+}
+#Sejong:hover {
+  fill: #C4BEE8;
+}
+#Gyeonggi:hover {
+  fill: #fdd2ff;
+}
+#Gangwon:hover {
+  fill: #babbff;
+}
+#Chungcheongbugdo:hover {
+  fill: #EBDEFF;
+}
+#Chungcheongnamdo:hover {
+  fill: #FEEBFF;
+}
+#Jeollabugdo:hover {
+  fill: #DDF9FA;
+}
+#Jeonlanamdo:hover {
+  fill: #C8FADC;
+}
+#Gyeongsangbugdo:hover {
+  fill: #D1D8FF;
+}
+#Gyeongsangnamdo:hover {
+  fill: #CFE2FA;
+}
+#Jeju:hover {
+  fill: #FAD1B6;
+}
+.TEXT {
+  fill: #ffffff;
+  font-size: 16;
+  font-weight: bold;
+  text-anchor: middle;
+  alignment-baseline: middle;
+  cursor: pointer;
+}
+
+.policyP {
+  display:none;
+  position: absolute;
+  right: 20%;
+  top: 30%;
+  width: 300px;
+
+}
+
+.policyC{
+	cursor:pointer;
+	color: white;
+	font-size: 1.1em;
+	text-align: center;
+	margin: 2px 5px 2px 5px;
+	background-color: #ff671c;
+	min-width: 50px;
+	float: left;
+	border: 1px solid lightgray;
+	padding: 5px;
+	border-radius: 5px 5px;
+	box-shadow: 0.3px 0.3px 0.3px 0.3px gray;
+}
+.policyC:hover{
+	margin: 1px 5px 3px 5px;
+	background-color: #ff8d55;
+}
+

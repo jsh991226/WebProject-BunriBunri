@@ -40,7 +40,7 @@
 	</head>
 	
 
-	<div class="container">
+	<div class="container"style="width:100%;">
 		<div class="row">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<tbody>
@@ -59,7 +59,7 @@
 										<form method="post" class="form-inline mb-2 "> <!--  action="writeRereplyAction.jsp" target="_self" -->
 											<input type="text" style="display:none;" id="postNumInput2" name="postNum"/>
 											<input type="text" style="display:none;" id="replyIDInput2" name="replyID"/>
-											<textarea class="form-control" id="replyTag" readonly style="resize: none;width:100%" rows="3"><%=content%></textarea>
+											<textarea class="form-control whiteinput" id="replyTag" readonly style="resize: none;width:100%" rows="3"><%=content%></textarea>
 										</form>
 									</li>
 								</ul>

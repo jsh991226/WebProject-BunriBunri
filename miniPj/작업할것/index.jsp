@@ -34,7 +34,6 @@
 			if (e.keyCode == 27) {
 				$('#login').fadeOut();
 				$('#register').fadeOut();
-				$('#mypage').fadeOut();
 			}
 		});
 
@@ -44,7 +43,8 @@
 <body>
 	<a href="#" class="top">TOP</a>
 	<div id="header">
-		<a href="index.jsp"><img id="titleImg"src="./images/bunribunriWebLogo.png" /> </a>
+		<a href="index.jsp"><img id="titleImg"
+			src="./images/bunribunriWebLogo.png" /> </a>
 		<ul>
 
 			<%
@@ -58,12 +58,11 @@
 			<%
 			}
 			%>
-			<li onClick="viewPage('CallCenter')">고객센터</li>
+			<li>고객센터</li>
 		</ul>
 
 	</div>
-	<div id="mainView">
-		<!-- 살야될거 -->
+	<div id="mainView"> <!-- 살야될거 -->
 		<div id="wrapper">
 			<div id="content">
 				<!--  <div id="leftContent">
@@ -72,20 +71,15 @@
 					</div>-->
 				<div id="leftContent">
 					<div id="boardBtn">
-						<a href="qBoard.jsp">질문게시판</a>
+						<a href="#" onClick="viewPage('board')">질문게시판</a>
 					</div>
 					<div id="policyBtn">
-						<a href="policy.jsp">분리수거 법률</a>
+						<a href="main.jsp">분리수거 법률</a>
 					</div>
 				</div>
 
 			</div>
-			<div id="middleContent">
-				<p>'조금더' 편한 분리수거 안내를</p>
-				<p>제공하는 '분리분리' 입니다</p>
-				<p>제공하는 '분리분리' 입니다</p>
-			
-			</div>
+			<div id="middleContent"></div>
 
 
 		</div>
@@ -121,10 +115,6 @@
 			</form>
 		</div>
 	</div>
-	<div id="mypage">
-		<jsp:include page="mypage.jsp" />
-	</div>
-
 
 
 

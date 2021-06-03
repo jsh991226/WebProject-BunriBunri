@@ -18,7 +18,14 @@
 		boardDAO boardDAO = new boardDAO(); 
 
 	} else {
-		response.sendRedirect("plzReg.jsp");
+		PrintWriter script = response.getWriter(); 
+        script.println("<script>"); 
+        script.println("alert('[알림] 로그인이 필요한 서비스 입니다.')"); 
+        script.println("location.href='index.jsp';");
+        script.println("</script>"); 
+        script.close(); 
+		
+		
 	}
 
 
@@ -71,49 +78,6 @@
 
 
 
-	<!-- 네비게이션  -->
-
-	<nav class="navbar navbar-default">
-
-		<div class="navbar-header">
-
-			<button type="button" class="navbar-toggle collapsed"
-
-				data-toggle="collapse" data-target="bs-example-navbar-collapse-1"
-
-				aria-expaned="false">
-
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-
-					class="icon-bar"></span>
-
-			</button>
-
-			<a class="navbar-brand" href="main.jsp">분리분리</a>
-
-		</div>
-
-		<div class="collapse navbar-collapse"
-
-			id="#bs-example-navbar-collapse-1">
-
-			<ul class="nav navbar-nav">
-
-				<li><a href="main.jsp">메인</a></li>
-
-				<li class="active"><a href="bbs.jsp">게시판</a></li>
-
-			</ul>
-
-
-
-
-
-
-		</div>
-
-	</nav>
-
 	<!-- 게시판 -->
 
 	<div class="container">
@@ -126,15 +90,7 @@
 
 					style="text-align: center; border: 1px solid #dddddd">
 
-					<thead>
 
-						<tr>
-
-							<thstyle="background-color: #eeeeee; text-align: center;">게시물 작성</th>
-
-						</tr>
-
-					</thead>
 
 					<tbody>
 

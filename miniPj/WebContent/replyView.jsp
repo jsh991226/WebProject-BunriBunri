@@ -25,8 +25,6 @@
 	    String result = userDAO.getNICK(user_id); 
 	    user_nick = result;
 
-	} else {
-		response.sendRedirect("plzReg.jsp");
 	}
 
 
@@ -48,7 +46,7 @@
     	<script>
     		$(document).ready(function(){
     			$(".container").addClass('replyGroup_' + <%=replyID%>)
-    			
+
     		})
 
     	</script>
@@ -57,7 +55,7 @@
 	</head>
 	
 
-	<div class="container" style="height: 130px;margin-bottom:10px;">
+	<div class="container" style="height: 130px;margin-bottom:10px;width:100%;">
 		<div class="row">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<tbody>
@@ -67,9 +65,9 @@
 								<ul class="list-group list-group-flush">
 	
 									<li class="list-group-item" style="width:100%; min-height:130px;">
-										<span id="<%=writerID%>">작성자 : <%=userNick%></span>
-										<span style="margin-left: 50px">작성일 : <%=date%></span>
-										 <a class="rereplyWrite pull-right" postNum='<%=postNum%>' replyID='<%=replyID%>' onClick="rereplyWrite('<%=postNum%>', '<%=replyID%>')" >[답글]</a>
+										<span class="rpWriter" id="<%=writerID%>">작성자 : <%=userNick%></span>
+										<span class="rpDate" style="margin-left: 50px">작성일 : <%=date%></span>
+										 <a class="rereplyWrite pull-right" id="writeRp" postNum='<%=postNum%>' replyID='<%=replyID%>' onClick="rereplyWrite('<%=postNum%>', '<%=replyID%>')" >[답글]</a>
 										<% 
 											if (writerID.equals(user_id)) {
 										%>	
@@ -86,7 +84,7 @@
 										 
 
 										<form method="post" class="form-inline mb-2" action="writeReplyAction.jsp">
-											<textarea class="form-control" id="replyTag" readonly name="replyContent" style="resize: none;width:100%" rows="3"><%=content%></textarea>
+											<textarea class="form-control whiteinput" id="replyTag" readonly name="replyContent" style="resize: none;width:100%" rows="3"><%=content%></textarea>
 										</form>
 										
 										
