@@ -58,7 +58,7 @@
         PrintWriter script = response.getWriter(); 
         script.println("<script>"); 
         script.println("alert('[알림] 게시물이 작성되었습니다.')"); 
-        script.println("location.href='index.jsp';"); 
+        script.println("location.href='qBoard.jsp';"); 
         script.println("</script>"); 
         script.close(); 
         return; 
@@ -70,7 +70,7 @@
 		} else {
 	        script.println("alert('[알림] 무언가 오류가 있다 이말이야~')"); 
 		}
-        script.println("location.href='index.jsp';"); 
+        script.println("location.href='qBoard.jsp';"); 
         script.println("</script>"); 
         script.close(); 		
         return; 		

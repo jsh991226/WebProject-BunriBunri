@@ -43,8 +43,7 @@
 
 
 										<form method="post" class="form-inline mb-2" action="writeReplyAction.jsp">
-											<textarea class="form-control whiteinput" id="replyTag" readonly name="replyContent" style="resize: none;width:100%" rows="3">
-											분리분리의 회원이 되어 더욱 많은 답변을 확인 해보세요!
+											<textarea class="form-control whiteinput" id="replyTag" readonly name="replyContent" style="resize: none;width:100%;text-align:center;font-weight:bold;" rows="3">분리분리의 회원이 되어 더욱 많은 답변을 확인 해보세요!
 											</textarea>
 										</form>
 										

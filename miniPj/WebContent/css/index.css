@@ -2,30 +2,37 @@
 	margin: 0;
 	padding: 0;
 }
+body{
+	padding-top: 200px;
+}
 
 html {
 	scroll-behavior: smooth;
 }
-body {
-	padding-top: 200px;
+.qBoardDiv{
+	width: 80%;
+	margin-left: 10%;
 }
 
-input[readonly].whiteinput{
-  background-color:white;
-  border: 0;
-  font-size: 1em;
+
+input[readonly].whiteinput {
+	background-color: white;
+	font-size: 1em;
 }
-textarea[readonly].whiteinput{
-  background-color:white;
-  border: 0;
-  font-size: 1em;
+
+textarea.autosize {
+	min-height: 250px;
 }
-#postImage{
+
+textarea[readonly].whiteinput {
+	background-color: white;
+	font-size: 1em;
+}
+
+#postImage {
 	width: 60%;
 	height: auto;
-	
 }
-
 
 a.top {
 	position: fixed;
@@ -45,22 +52,7 @@ a.top {
 }
 
 
-
-#boardHeadBox > div {
-	width: 12%;
-	float: left;
-	font-size: 0.8em;
-	margin-left: -15px;
-}
-
-#boardSerach{
-	width: 20%;
-}
-
-#boardHeadBox > input {
-	float: left;
-}
-#boardHeadBox > input:last-child {
+#boardHeadBox>input {
 	float: right;
 }
 
@@ -72,43 +64,41 @@ a.top {
 	-ms-filter: blur(5px);
 	filter: blur(5px);
 }
-#unRegisterBtn{
+
+#unRegisterBtn {
 	background-color: salmon;
 	border: 1px solid #fe756d;
 	opacity: 0.8;
 }
-#unRegisterBtn:hover{
+
+#unRegisterBtn:hover {
 	background-color: #fe756d;
 	opacity: 0.8;
 }
 
-
-#register, #login, #mypage{
-	display:none;
+#register, #login, #mypage {
+	display: none;
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	background-color: gray;
 	opacity: 0.9;
 	z-index: 1000;
-
 }
-#mypageForm{
-	background-color:white;
+
+#mypageForm {
+	background-color: white;
 	position: absolute;
 	width: 40%;
 	height: 60%;
 	margin-left: 50%;
 	left: -20%;
-	top: 20%;	
-	
-	
+	top: 20%;
 }
 
-
-#registerForm, #loginForm{
+#registerForm, #loginForm {
 	position: absolute;
 	width: 24%;
 	height: 40%;
@@ -116,27 +106,22 @@ a.top {
 	left: -12%;
 	top: 20%;
 }
-#registerForm > form > input, #loginForm > form > input{
+
+#registerForm>form>input, #loginForm>form>input {
 	margin-top: 5px;
 	width: 100%;
 }
 
-#registerForm > i, #loginForm >i{
+#registerForm>i, #loginForm>i {
 	font-weight: bold;
 	font-size: 1.5em;
 	text-align: center;
 }
 
-
-
 #mainView {
 	width: 76%;
 	margin-left: 12%;
-	
 }
-
-
-
 
 #wrapper {
 	margin: 0 auto;
@@ -156,7 +141,7 @@ a.top {
 	top: 0px;
 }
 
-#titleImg { 
+#titleImg {
 	width: 280px;
 	height: 80px;
 	margin: 10px;
@@ -263,13 +248,232 @@ textarea {
 	resize: vertical;
 }
 
-.replyDelete, .replyEdit, .rereplyWrite, .postEdit, .postDelete, .mypageExit,
-	.boardPost {
+.replyDelete, .replyEdit, .rereplyWrite, .postEdit, .postDelete,
+	.mypageExit, .boardPost, .goHover{
 	cursor: pointer;
 }
-#mypageContent > div {
+.boardPost{
+	width: 100%;
+	margin-bottom: 5px;
+	//border-bottom: 1px solid #ced4da;
+	float:left;
+}
+.boardPost:hover{
+	background-color: #dee2e6;
+}
+.boardPost:nth-child(even){
+	background-color: #e9ecef;
+	
+}
+
+#boardTitleCss{
+	font-size: 1.3em;
+	font-weight: bold;
+}
+#boardNickCss, #boardDateCss, #boardViewCss {
+	float:left;
+	font-size: 1.1em;
+	margin-right: 30px;
+	min-width: 150px;
+}
+
+#mypageContent>div {
 	font-size: 1.3em;
 	font-weight: bold;
 	text-align: center;
 }
 
+#sidebar, #quickPhoto{
+	display: none;
+}
+.mobileLI{
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+/*  768px 이하부터 적용 */
+@media ( max-width : 768px) {
+	body{
+		padding-top: 100px;
+	}
+	#header {
+		display: block;
+		text-align: center;
+		width: 100%;
+		height: 10%;
+		left: 0px;
+	}
+	#header>ul {
+		display: none;
+	}
+	#titleImg {
+		display: inline;
+		margin: 10px auto;
+		width: 50%;
+		height: auto;
+		float: none;
+	}
+	#sidebar {
+		display: inline-block;
+		background-color: white;
+		width: 300px;
+		height: 100%;
+		top: 0;
+		left: -300px;
+		position: fixed;
+		z-index: 4;
+	}
+	#sidebar-menu {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	#sidebar-menu>li {
+		list-style: none;
+		height: 80px;
+		line-height: 80px;
+	}
+	.sidebar-toggle-btn {
+		cursor: pointer;
+		width: 40px;
+		height: 35px;
+		position: absolute;
+		top: 30px;
+		left: 335px;
+		border: none;
+		color: black;
+		transform: translate(-50%, -50%);
+	}
+	.sidebar-toggle-btn span {
+		width: inherit;
+		height: 5px;
+		background-color: ivory;
+		display: inline-block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		transition: 0.3s;
+	}
+	.sidebar-toggle-btn span:before, .sidebar-toggle-btn span:after {
+		left: 0px;
+		content: '';
+		background-color: ivory;
+		width: inherit;
+		height: inherit;
+		position: absolute;
+		transition: 0.3s;
+	}
+	.sidebar-toggle-btn span:before {
+		top: -10px;
+	}
+	.sidebar-toggle-btn span:after {
+		top: 10px;
+	}
+	.sidebar-toggle-btn.open span {
+		background-color: transparent;
+	}
+	.sidebar-toggle-btn.open span:before {
+		transform: rotate(45deg);
+		top: 0;
+	}
+	.sidebar-toggle-btn.open span:after {
+		transform: rotate(-45deg);
+		top: 0;
+	}
+	#mainView {
+		width: 100%;
+		margin-left: 0%;
+	}
+	#boardBtn, #policyBtn {
+		width: 100%;
+		height: auto;
+		max-height: 200px;
+		margin: 10px;
+		background-size: 100%;
+		background-repeat: no-repeat;
+	}
+	#leftContent>div:hover {
+		margin-top: 10px;
+		opacity: 1.0;
+	}
+	#leftContent>div {
+		cursor: pointer;
+	}
+	#leftContent>div:hover>a {
+		display: none;
+	}
+	#registerForm, #loginForm, #mypageForm {
+		width: 70%;
+		height: 40%;
+		margin-left: 50%;
+		left: -35%;
+		top: 20%;
+	}
+	#mypageForm {
+		height: 60%;
+	}
+	#postDate, .mobileNoShow{
+		display: none;
+	}
+	
+	.background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		visibility: hidden;
+		background: rgba(0, 0, 0, .5);
+		z-index: 3;
+	}
+	#mainView{
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+	hr.solid {
+		margin: 0;
+		border-top: 1px solid gray;
+	}
+	#sidebar-profile {
+		height: 200px;
+		background-color: #ff671c;
+	}
+	#sidebar-loginRegister {
+		display: flex;
+		justify-content: center;
+	}
+	#sidebar-loginRegister>div {
+		margin: 0 10px;
+	}
+	#quickPhoto{
+		display:block;
+		position: fixed;
+		bottom: 10px;
+		width: 80%;
+		height: 50px;
+		left: -40%;
+		margin-left: 50%;
+		font-size: 1.3em;
+		line-height: 45px;
+		background-color: #ff671c;
+		text-align:center;
+		border: 2px solid white;
+		font-weight:bold;
+		color:white;
+		border-radius:10px;
+		cursor:pointer;
+	
+	}
+	.qBoardDiv{
+		width: 100%;
+		margin-left:0px;
+	}
+	.bigMsg{
+		font-size: 1.3em;
+		color:white;
+		line-height: 40px;
+	}
+	
+}

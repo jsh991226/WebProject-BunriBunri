@@ -2,22 +2,62 @@ $(document).on('click', '.boardPost', function() {
 	location.href = "./viewPost.jsp?postNum=" + $(this).attr('postNum');
 	//$("#mainView").load("./viewPost.jsp?postNum=" + $(this).attr('postNum'));
 });
+$("textarea.autosize").on('keydown keyup', function() {
+	$(this).height(1).height($(this).prop('scrollHeight') + 12);
+});
+function alertTest() {
+	Swal.fire({
+		title: "테스트",
+		text: "테스트용 달달한 얼렛",
+		icon: 'success',
+		confirmButtonColor: '#3085d6',
+		confirmButtonText: '확인',
+	})
+}
 
-/*
-$(document).ready(function() {
-	$('#unRegisterBtn').click(function() {
-		$('#register').fadeOut();
-	});
+
+function sideClick() {
+	var duration = 300;
+	$('.sidebar-toggle-btn').toggleClass('open')
+	if ($('.sidebar-toggle-btn').hasClass('open')) {
+		$('#sidebar').stop(true).animate({ left: '0px' }, duration);
+		$('.sidebar-toggle-btn').stop(true).animate({ left: '265px' }, duration);
+		$('.background').css('opacity', 1);
+		$('.background').css('visibility', 'visible');
+		$('.background').css('transition', 'all .35s');
+		return;
+	} else {
+		$('#sidebar').stop(true).animate({ left: '-300px' }, duration);
+		$('.sidebar-toggle-btn').stop(true).animate({ left: '335px' }, duration);
+		$('.background').css('opacity', 0);
+		$('.background').css('visibility', 'hidden');
+		$('.background').css('transition', 'all .35s');
+		return;
+	}
+
+}
 
 
 
-})*/
 
-function searchBtn(){
+function searchBtn() {
 	var searchType = $("#searchType").val();
 	var searchText = $("#boardSerach").val();
-	alert(searchType+searchText);
+	alert(searchType + searchText);
 }
+function cutTitle(title) {
+	cuttitle = title.split("");
+	result = "";
+	if (cuttitle.length() >= 18) {
+		for (i = 0; i < 18; i++) result += cuttitle[i];
+		result += "..."
+	} else {
+		result = title;
+	}
+	return result;
+
+}
+
 
 
 function viewPage(page) {
@@ -29,32 +69,52 @@ function viewPage(page) {
 	if (page == "login") {
 		//$("#register").css('display','block');
 		$('#login').fadeIn();
-	}	
-	if (page =="logout") {
+	}
+	if (page == "logout") {
 		location.href = "./userLogout.jsp";
 	}
-	if (page=="board") {
+	if (page == "board") {
 		$("#mainView").load("./board.jsp");
 	}
-	if (page=="mypage") {
+	if (page == "mypage") {
 		$('#mypage').fadeIn();
 	}
-	if (page=="policy") {
+	if (page == "policy") {
 		$("#mainView").load("./policy.jsp");
-	}	
-	if (page=="CallCenter") {
-		alert("[알림] 아직 준비중인 기능입니다");
-	}	
-	
+	}
+	if (page == "CallCenter") {
+
+		Swal.fire({
+			title: "지원하지 않는 기능입니다",
+			html: "아직 개발중인 게시판 입니다<br/>불편을 드려 죄송합니다",
+			icon: 'info',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '수정',
+			cancelButtonText: '취소'
+		})		
+	}
+
 }
 
 function replyDelete(postNum, replyID) {
-	var jbResult = confirm('[!] 댓글을 삭제 하시겠습니까?');
-	if (jbResult) {
-		location.href = "./deleteReply.jsp?postNum=" + postNum + "&replyID=" + replyID;
-	} else {
-		return;
-	}
+	Swal.fire({
+		title: "댓글을 삭제 하시겠습니까?",
+		text: "삭제한 댓글은 복구할 수 없습니다",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '삭제',
+		cancelButtonText: '취소'
+	}).then((result) => {
+		if (result.value) {
+			location.href = "./deleteReply.jsp?postNum=" + postNum + "&replyID=" + replyID;
+		}
+	})
+		
+
 }
 
 
@@ -62,21 +122,40 @@ function replyDelete(postNum, replyID) {
 
 
 function deletePost(postNum) {
-	var jbResult = confirm('[!] 게시물을 삭제 하시겠습니까?');
-	if (jbResult) {
+	Swal.fire({
+		title: "게시물을 삭제 하시겠습니까?",
+		text: "삭제한 게시물은 복구할 수 없습니다",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '삭제',
+		cancelButtonText: '취소'
+	}).then((result) => {
+		if (result.value) {
 		location.href = "./deletePost.jsp?postNum=" + postNum;
-	} else {
-		return;
-	}
+		}
+	})	
+	
+	
 }
 function editPost(postNum) {
-	var jbResult = confirm('[!] 게시물을 수정 하시겠습니까?');
-	if (jbResult) {
-		//location.href = "./editBoard.jsp?postNum=" + postNum;
+
+	Swal.fire({
+		title: "게시물을 수정 하시겠습니까?",
+		text: "수정된 게시물은 되돌릴 수 없습니다.",
+		icon: 'question',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: '수정',
+		cancelButtonText: '취소'
+	}).then((result) => {
+		if (result.value) {
 		$("#mainView").load("./editBoard.jsp?postNum=" + postNum);
-	} else {
-		return;
-	}
+		}
+	})		
+	
 }
 
 
@@ -157,6 +236,7 @@ function movePage(dir) {
 
 
 }
+
 
 
 

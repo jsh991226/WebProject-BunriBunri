@@ -73,6 +73,7 @@ if (session.getAttribute("loginCheck") == "true") {
 			$(".postDelete").attr('onClick', 'deletePost("' + sptemp[0] + '")')
 			$(".postEdit").attr('onClick', 'editPost("' + sptemp[0] + '")')
 		}
+		$("textarea.autosize").height(1).height( $("textarea.autosize").prop('scrollHeight')+12 );	
 
 	});
 </script>
@@ -97,12 +98,51 @@ if (session.getAttribute("loginCheck") == "true") {
 			<%
 			}
 			%>
-			<li>고객센터</li>
+			<li onClick="viewPage('CallCenter')">고객센터</li>
 		</ul>
 
+		<label for="sidebar" class="background" onClick="sideClick()"></label>
+
+		<!-- 모바일 사이드(nav)바 -->
+		<aside id="sidebar">
+			<div id=sidebar-content>
+				<div id="sidebar-profile">
+					<%
+					if (session.getAttribute("loginCheck") == "true") {
+					%>
+					<div id="isSigned" class="bigMsg"><%=user_nick%>님 환영합니다
+					</div>
+					<div id="sidebar-loginRegister">
+						<div class="mobileLI" onClick="viewPage('logout')">로그아웃</div>
+						<div class="mobileLI" onClick="viewPage('mypage')">마이페이지</div>
+					</div>
+					<%
+					} else {
+					%>
+					<div id="isSigned" class="bigMsg">로그인이 필요합니다.</div>
+					<div id="sidebar-loginRegister">
+						<div class="mobileLI" onClick="viewPage('register')">회원가입</div>
+						<div class="mobileLI" onClick="viewPage('login')">로그인</div>
+					</div>
+					<%
+					}
+					%>
+
+				</div>
+				<ul id="sidebar-menu">
+					<li class="mobileLI" onClick="viewPage('CallCenter')">고객센터</li>
+					<hr class="solid">
+					<li class="mobileLI" onClick="location.href='qBoard.jsp'">질문게시판</li>
+					<hr class="solid">
+					<li class="mobileLI" onClick="location.href='policy.jsp'">분리수거 법률</li>
+				</ul>
+			</div>
+			<div class="sidebar-toggle-btn" onClick="sideClick()">
+				<span></span>
+			</div>
+		</aside>
 	</div>
 	<div id="mainView">
-		<!-- 살야될거 -->
 		<input type="button" class="btn btn-primary"
 			onClick='location.href="qBoard.jsp"'
 			style="width: 100%; height: 40px; margin-bottom: 40px;"
@@ -146,17 +186,16 @@ if (session.getAttribute("loginCheck") == "true") {
 									class="form-control form-control-plaintext whiteinput" readonly
 									id="postView" maxlength="50" /></td>
 							</tr>
-							<tr>
-								<td colspan="3" style="background-color:white;"><img id="postImage" src=''
+							<tr style="border-bottom:0px;">
+								<td colspan="3" style="background-color:white;border-bottom:0px;"><img id="postImage" src=''
 									style="display: none;" /></td>
 							</tr>
 
 							<tr>
 
-								<td colspan="3" style="border-top:0px solid blue;"><textarea
-										class="form-control form-control-plaintext whiteinput"
-										readonly id="postContent" maxlength="2048"
-										style="height: 350px;"></textarea></td>
+								<td colspan="3"><textarea
+										class="form-control form-control-plaintext whiteinput autosize"
+										readonly id="postContent" maxlength="2048" style="border: 0px;"></textarea></td>
 
 							</tr>
 							<tr id="postOwner" style="display: none">
@@ -298,4 +337,5 @@ if (session.getAttribute("loginCheck") == "true") {
 	</div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </html>

@@ -54,8 +54,8 @@
 								<div style="width:95%;float:left;">						
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item" style="min-height:110px;margin-bottom: -30px;">
-										<span id="<%=writerID%>">작성자 : <%=userNick%></span>
-										<span style="margin-left: 50px">작성일 : <%=date%></span>										
+										<span id="<%=writerID%>"><%=userNick%></span>
+										<span style="margin-left: 10px;font-size:0.8em">(<%=date%>)</span>								
 										<form method="post" class="form-inline mb-2 "> <!--  action="writeRereplyAction.jsp" target="_self" -->
 											<input type="text" style="display:none;" id="postNumInput2" name="postNum"/>
 											<input type="text" style="display:none;" id="replyIDInput2" name="replyID"/>

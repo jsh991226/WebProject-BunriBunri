@@ -56,6 +56,16 @@ public class Board  extends userlistDAO{
 	public void setImage(String Image) {
 		this.Image = Image;
 	}
+	public String cutTitle(int len, String title) {
+		String result ="";
+		if (title.length()>=len) {
+			result = title.substring(0, len);
+			result+="...";
+		}else {
+			result=title;
+		}
+		return result;
+	}
 	
 	
 	

@@ -39,7 +39,7 @@
         PrintWriter script = response.getWriter(); 
         script.println("<script>"); 
         script.println("alert('[알림] 게시물이 삭제 되었습니다.')"); 
-        script.println("location.href='index.jsp';");
+        script.println("location.href='qBoard.jsp';");
         script.println("</script>"); 
         script.close(); 
         return; 

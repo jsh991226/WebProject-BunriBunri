@@ -65,8 +65,8 @@
 								<ul class="list-group list-group-flush">
 	
 									<li class="list-group-item" style="width:100%; min-height:130px;">
-										<span class="rpWriter" id="<%=writerID%>">작성자 : <%=userNick%></span>
-										<span class="rpDate" style="margin-left: 50px">작성일 : <%=date%></span>
+										<span class="rpWriter" id="<%=writerID%>"><%=userNick%></span>
+										<span class="rpDate" style="margin-left: 10px;font-size:0.8em">(<%=date%>)</span>
 										 <a class="rereplyWrite pull-right" id="writeRp" postNum='<%=postNum%>' replyID='<%=replyID%>' onClick="rereplyWrite('<%=postNum%>', '<%=replyID%>')" >[답글]</a>
 										<% 
 											if (writerID.equals(user_id)) {

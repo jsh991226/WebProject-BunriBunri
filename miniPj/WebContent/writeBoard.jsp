@@ -102,12 +102,12 @@
 
 						<tr>
 
-							<td><textarea class="form-control" placeholder="글 내용" name="boardContent" maxlength="2048" style="height: 350px;"></textarea></td>
+							<td><textarea class="form-control autosize" placeholder="글 내용" name="boardContent" maxlength="2048"></textarea></td>
 
 						</tr>
 						<tr>
 							<td>
-								<img src="" id="loadImg" style="margin:10px;display:none;"/>
+								<img src="" id="loadImg" style="margin:10px;display:none;width:60%;height:auto;"/>
 							</td>
 						</tr>
 						<tr>

@@ -151,7 +151,7 @@
 						</tr>
 						<tr>
 							<td colspan="1">
-								<img src="" id="loadImg" style="margin:10px;display:none;"/>
+								<img src="" id="loadImg" style="margin:10px;display:none;width:60%;height:auto;"/>
 							</td>
 						</tr>
 						<tr>
